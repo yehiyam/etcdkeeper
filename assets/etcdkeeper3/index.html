@@ -115,10 +115,10 @@
 		}
 		
 		var separator = '';
-		var serverBase = '';
+		var serverBase = '..';
 		var etcdBase = Cookies.get("etcd-endpoint");
 		if(typeof(etcdBase) === 'undefined') {
-			etcdBase = "127.0.0.1:2379";
+			etcdBase = "etcd-client:2379";
 		}
 		var tree = [];
 		var idCount = 0;
@@ -126,16 +126,16 @@
 		var curIconMode = 'mode_icon_text';
 		var aceMode = Cookies.get('ace-mode');
 		if (typeof(aceMode) === 'undefined') {
-			aceMode = 'text';
+			aceMode = 'json';
 		}
 		var treeMode = Cookies.get('tree-mode');
 		if (typeof(treeMode) === 'undefined') {
-			treeMode = 'list';
+			treeMode = 'path';
 		}
-		//var autoFormat = Cookies.get('auto-format');
-		//if(typeof(autoFormat) === 'undefined') {
-			//autoFormat = 'false';
-		//}
+		var autoFormat = Cookies.get('auto-format');
+		if(typeof(autoFormat) === 'undefined') {
+			autoFormat = 'true';
+		}
 		
 		// get separator
 		$.ajax({
@@ -254,9 +254,9 @@
 							resetValue()
 						}else {
 							editor.getSession().setValue(data.node.value);
-							//if (autoFormat === 'true') {
-								//format(aceMode);
-							//}
+							if (autoFormat === 'true') {
+								format(aceMode);
+							}
 							var ttl = 0;
 							if (data.node.ttl) {
 								ttl = data.node.ttl;
