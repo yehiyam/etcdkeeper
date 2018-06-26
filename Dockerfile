@@ -12,7 +12,7 @@ FROM alpine:3.7
 
 ENV HOST="0.0.0.0"
 ENV PORT="8080"
-ENV NAME="request"
+ENV NAME="/request"
 
 RUN apk add --no-cache ca-certificates
 
