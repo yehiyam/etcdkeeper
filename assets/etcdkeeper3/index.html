@@ -55,6 +55,7 @@
 	<div id="treeDirMenu" class="easyui-menu" style="width:150px;">
 		<div onclick="$('#cnode').window('open')" data-options="iconCls:'icon-add'">Create Node</div>
 		<div onclick="removeNode()" data-options="iconCls:'icon-remove'">Remove Node</div>
+		<div onclick="refreshNode()" data-options="iconCls:'icon-reload'">Refresh Node</div>
 	</div>
 	<div id="treeNodeMenu" class="easyui-menu" style="width:150px;">
 		<div onclick="removeNode()" data-options="iconCls:'icon-remove'">Remove Node</div>
@@ -270,9 +271,9 @@
 					}
 				});
 			}else {
-				if (node.children.length > 0) {
-					$('#etree').tree(node.state === 'closed' ? 'expand' : 'collapse', node.target);
-				}
+				// if (node.children.length > 0) {
+				// 	$('#etree').tree(node.state === 'closed' ? 'expand' : 'collapse', node.target);
+				// }
 				//editor.setReadOnly(true);
 				$('#footer').html('&nbsp;');
 				// clear child node
@@ -554,6 +555,10 @@
 			return null;
 		}
 		
+		function refreshNode() {
+			var node = $('#etree').tree('getSelected');
+			showNode(node);
+		}
 		function removeNode() {
 			var node = $('#etree').tree('getSelected');
 			$.messager.confirm('Confirm', 'Remove ' + node.text + '?', function(r){
